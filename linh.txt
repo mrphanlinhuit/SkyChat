@@ -1,0 +1,1 @@
+sao sử dụng git fetch SkyChat mà không lấy dữ liệu về được nhỉ ?
