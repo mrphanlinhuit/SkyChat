@@ -61,7 +61,7 @@ app.use(function(err, req, res, next) {
 
 
 
-app.listen(port, function(){
+var server = app.listen(port, function(){
     console.log('The magic happens on port ', port);
 });
 
@@ -71,52 +71,64 @@ app.listen(port, function(){
 
 //Socket.io =================================
 
-var io = require('socket.io').listen(app);
+var io = require('socket.io').listen(server);
 
-var chanels = {};
+io.set('transports', [
+    // 'websocket',
+    'xhr-polling',
+    'jsonp-polling'
+]);
 
-io.sockets.on('connection', function(socket){
+var channels = {};
+
+io.sockets.on('connection', function (socket) {
     var initiatorChannel = '';
-    if(!io.isConnected)
+    if (!io.isConnected) {
         io.isConnected = true;
-    
-    socket.on('new-chanel', function(data){
-        if(!chanels[data.chanel]){
-            initiatorChannel = data.chanel;
-            console.log('**** initiatorChannel', initiatorChannel);
+    }
+
+    socket.on('new-channel', function (data) {
+        if (!channels[data.channel]) {
+            initiatorChannel = data.channel;
         }
-        
-        chanels[data.chanel] = data.chanel;
+
+        channels[data.channel] = data.channel;
         onNewNamespace(data.channel, data.sender);
     });
-    
+
     socket.on('presence', function (channel) {
-        console.log('_____socket.on(presence)');
         var isChannelPresent = !! channels[channel];
         socket.emit('presence', isChannelPresent);
     });
 
     socket.on('disconnect', function (channel) {
-        console.log('_____socket.on(disconnected)');
         if (initiatorChannel) {
-            console.log('_____initialtorChannel: ', initiatorChannel);
             delete channels[initiatorChannel];
-            console.log('______channels: ', channels);
         }
     });
 });
 
 function onNewNamespace(channel, sender) {
     io.of('/' + channel).on('connection', function (socket) {
+        var username;
         if (io.isConnected) {
-            console.log('io.isConnected', io.isConnected);
             io.isConnected = false;
             socket.emit('connect', true);
         }
 
         socket.on('message', function (data) {
-            if (data.sender === sender)
+            if (data.sender === sender) {
+                if(!username) username = data.data.sender;
+                
                 socket.broadcast.emit('message', data.data);
+            }
+        });
+        
+        socket.on('disconnect', function() {
+            if(username) {
+                socket.broadcast.emit('user-left', username);
+                username = null;
+            }
         });
     });
 }

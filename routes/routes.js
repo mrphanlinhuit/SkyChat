@@ -4,12 +4,17 @@ module.exports = function(app){
     // =====================================
     
     app.route('/')
-        .app.get('/', function(req, res, next){
+        .get(function(req, res, next){
             res.render('index');//load the index.ejs file
         });
     
     app.route('/chat')
-        .app.get('/chat', function(req, res, next){
+        .get(function(req, res, next){
             res.render('chat');
         });
+    
+    app.route('/multi')
+        .get(function(req, res, next){
+            res.render('Multi-Broadcasters-and-Many-Viewers');
+    });
 };

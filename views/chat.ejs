@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <meta name="author" content="Trần Tâm UIT" />
-    <title></title>
+    <title>SkyChat</title>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src="./js/RTCMultiConnection-v2.2.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation" id="main_nav">
@@ -71,11 +73,17 @@
 
 
 <div id="content">
+    <section class="experiment">
+        <select>
+            <option>Broadcaster</option>
+            <option>Anonymous Viewer</option>
+            <option>Room Moderator</option>
+        </select>
+        <button id="continuous">Continue</button><br/>
 
+    </section>
     <div class="row">
-        <div class="col-lg-offset-3 col-md-6">
-            <video controls class="img img-responsive" src=""  ></video>
-            <video controls class="img img-responsive" src="" width="200px"></video>
+        <div class="col-lg-offset-3 col-md-6" id="videos">
         </div>
 
 
@@ -123,8 +131,10 @@
         $(function() {
             $( "video" ).draggable();
         });
-    });
+    });   
 </script>
+<script  src="./js/RTCSignaling.js"></script>
+
 
 <style>
     #content{
