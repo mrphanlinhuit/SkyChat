@@ -13,15 +13,19 @@ html,body {
     a img {
         border: none;
     }
-
+    #signModal,#loginModal{
+        margin-top: 60px;
+    }
     .navbar{
-        margin-bottom: 0px;
+        width: 100%;
     }
 
     #content{
         background: url("../images/back.jpg") repeat-y;
-		background-position: top;
+        background-position: top;
         padding-top: 10px;
+        max-height: 315%;
+        min-height: 50%;
     }
     #room_entry {
         position: relative;
@@ -70,6 +74,14 @@ html,body {
     .thumbnails {
         width: 150px;
     }
+
+.panel-footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10000;
+}
 
     footer{
         text-align: center;
