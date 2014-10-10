@@ -4,9 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <meta name="author" content="Trần Tâm UIT" />
-    <title>SkyChat</title>
-    <script src='/socket.io/socket.io.js'></script>
-    <script src="./js/RTCMultiConnection-v2.2.js"></script>
+    <title></title>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation" id="main_nav">
@@ -73,50 +71,38 @@
 
 
 <div id="content">
-    <section class="experiment">
-        <select>
-            <option>Broadcaster</option>
-            <option>Anonymous Viewer</option>
-            <option>Room Moderator</option>
-        </select>
-        <button id="continuous">Continue</button><br/>
 
-    </section>
-    <div class="row">
-        <div class="col-lg-offset-3 col-md-6" id="videos">
+    <div class="video">
+        <div class="col-md-12">
+
+            <video controls class="img img-responsive" src="#" > </video>
+            <video controls class="img img-responsive subVideo" src="#" width="200"></video>
+
         </div>
 
+        <div class="controls">
+            <div class="form-group">
+                <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
+                    <span class="glyphicon glyphicon-sd-video"></span>
+                </button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
+                    <span class="glyphicon glyphicon-hd-video"></span>
+                </button>
+            </div>
+        </div>
 
-        <div class="form-group">
-            <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
-                <span class="glyphicon glyphicon-sd-video"></span>
-            </button>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
-                <span class="glyphicon glyphicon-hd-video"></span>
-            </button>
-        </div>
     </div>
 </div>
 
 
-    <footer class="panel-footer">
-        <div class="navbar-form  navbar-right">
-            <div class="form-group">
-                <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
-                    <span class="glyphicon  glyphicon-cog"></span>
-                </button>
-            </div>
-            <div class="form-group" >
-                <button class="btn btn-default" data-toggle="modal" data-target="#loginModal" >
-                    <span class="glyphicon glyphicon-lock"></span>
-                </button>
+<footer class="panel-footer">
+    <a href="https://chat-blog.skyway.io">Blog</a>
+    <a href="/info/help">How to Use</a>
+    <a href="/info/terms">Terms of Service</a>
+</footer>
 
-            </div>
-        </div>
-
-    </footer>
 
 <script src="./js/jquery-2.1.1.js"></script>
 <script src="./js/bootstrap.min.js"></script>
@@ -129,20 +115,40 @@
 <script>
     $(function() {
         $(function() {
-            $( "video" ).draggable();
+            $( ".video" ).draggable();
         });
-    });   
+    });
 </script>
-<script  src="./js/RTCSignaling.js"></script>
-
 
 <style>
     #content{
         min-height: 532px;
+        margin-bottom: 13px;
     }
 
     .navbar{
-        margin-bottom: 0px;
+        margin-bottom: 13px;
+    }
+
+    .video{
+        max-width: 960px;
+        min-width: 320px;
+    }
+
+    .img-responsive
+    {
+        width: 100%;
+        border: 1px solid white;
+    }
+    .subVideo{
+        width: 30%;
+        margin-top: -15%;
+        float: right;
+    }
+
+    .controls{
+        display: inline-flex;
+        margin-left: 15px;
     }
 </style>
 
