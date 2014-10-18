@@ -32,7 +32,7 @@ html,body {
         z-index: 10;
         text-align: center;
         margin: 0 auto;
-        padding: 11px;
+        padding-bottom: 10px;
         top: 15%;
         width:60%;
         min-width: 320px;
